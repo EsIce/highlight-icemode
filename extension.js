@@ -5,6 +5,7 @@ function activate(context) {
     var timeout = null;
     var activeEditor = vscode.window.activeTextEditor;
     var decorationTypes = {};
+  
 
     vscode.window.onDidChangeTextEditorSelection(function (event) {
         //var aaa = activeEditor.document.getText(activeEditor.selection);
@@ -38,41 +39,54 @@ function activate(context) {
         if (!activeEditor || !activeEditor.document) {
             return;
         }
+        try {
+            var text = activeEditor.document.getText();
+            var word = activeEditor.document.getText(activeEditor.selection);
+            //console.log("1word:"+word);
+            var mathes = {}, match;
+            var opts = 'gi';
+            var pattern = new RegExp(word, opts);
+            if (word != "") {
+                var config = vscode.workspace.getConfiguration('highlight-icemode');
+                var borderWidth = config.borderWidth;
+                var borderRadius = config.borderRadius;
+                var borderColor = config.borderColor;
+                var backgroundColor = config.backgroundColor;
+                while (match = pattern.exec(text)) {
+                    var startPos = activeEditor.document.positionAt(match.index);
+                    var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+                    var range = {
+                        range: new vscode.Range(startPos, endPos)
+                    };
+                    var matchedValue = match[0];
+                    if (mathes[matchedValue]) {
+                        mathes[matchedValue].push(range);
+                    } else {
+                        mathes[matchedValue] = [range];
+                    }
 
-        var text = activeEditor.document.getText();
-        var word = activeEditor.document.getText(activeEditor.selection);
-        //console.log("1word:"+word);
-        var mathes = {}, match;
-        var opts = 'gi';
-        var pattern = new RegExp(word, opts);
-        if (word != "") {
-            while (match = pattern.exec(text)) {
-                var startPos = activeEditor.document.positionAt(match.index);
-                var endPos = activeEditor.document.positionAt(match.index + match[0].length);
-                var range= {
-                    range: new vscode.Range(startPos, endPos)
-                };
-                var matchedValue = match[0];
-                if (mathes[matchedValue]) {
-                    mathes[matchedValue].push(range);
-                } else {
-                    mathes[matchedValue] = [range];
+                    if (!decorationTypes[matchedValue]) {
+                       
+                        decorationTypes[matchedValue] = vscode.window.createTextEditorDecorationType({
+                            borderStyle: 'solid',
+                            borderWidth: borderWidth,
+                            borderRadius: borderRadius,
+                            borderColor: borderColor,
+                            backgroundColor: backgroundColor
+                        });
+                    }
                 }
+            }
 
-                if (!decorationTypes[matchedValue]) {
-                    decorationTypes[matchedValue] = vscode.window.createTextEditorDecorationType({
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                    });
-                }
-            } 
+            Object.keys(decorationTypes).forEach((v) => {
+                var range = mathes[v] ? mathes[v] : [];
+                var decorationType = decorationTypes[v];
+                activeEditor.setDecorations(decorationType, range);
+            })
+        } catch (error) {
+            vscode.window.showInformationMessage("highlight-icemode got some error. but it's ok! dont' be afraid !");
         }
         
-        Object.keys(decorationTypes).forEach((v) => {
-            var range = mathes[v] ? mathes[v] : [];
-            var decorationType = decorationTypes[v];
-            activeEditor.setDecorations(decorationType, range);
-        })
     }
 }
 exports.activate = activate;

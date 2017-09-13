@@ -24,8 +24,16 @@ please set your setting.json. important requirements
 }
 
 ## Options 
+you can customized setting
 
-not now
+"highlight-icemode.borderWidth": "2px",     //default 1px
+
+"highlight-icemode.borderRadius": "0px",    //default 3px
+
+"highlight-icemode.borderColor": "",        //default ''
+
+"highlight-icemode.backgroundColor": "",    //default ''
+
 
 ## Known Issues
 
@@ -33,7 +41,7 @@ always perfect
 
 ## Future Direction
 
-add config set custom border style or background color
+...
 
 
 ##############################################

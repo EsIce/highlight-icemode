@@ -1,14 +1,21 @@
 # Change Log
 
+##0.0.5 (2017-09-13)
+
+you can customized border style setting
+
+
 ##0.0.4 (2017-09-13)
 
 small bug fixed
+
 
 ##0.0.3 (2017-09-13)
 
 定義了新的套件名稱 > change extension name to 'Highlight-icemode'
 
 封裝並正式發佈 > package update and release
+
 
 ##0.0.2 (2017-09-13)
 

@@ -2,7 +2,7 @@
     "name": "highlight-icemode",
     "displayName": "highlight-icemode",
     "description": "Highlight all selected occurrences of words. (border mode)",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "iceliu",
     "icon": "images/icon.png",
     "engines": {
@@ -19,6 +19,34 @@
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
+    },
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "highlight-icemode configuration",
+            "properties": {
+                "highlight-icemode.borderWidth": {
+                    "type": "string",
+                    "default": "1px",
+                    "description": "Set Border Size"
+                },
+                "highlight-icemode.borderRadius": {
+                    "type": "string",
+                    "default": "3px",
+                    "description": "Set Border Radius"
+                },
+                "highlight-icemode.borderColor": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Set Border Color"
+                },
+                "highlight-icemode.backgroundColor": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Set backgroundColor"
+                }
+            }
+        }
     },
     "repository": {
         "type": "git",
