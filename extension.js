@@ -14,6 +14,7 @@ function activate(context) {
     }, null, context.subscriptions);
 
     vscode.window.onDidChangeActiveTextEditor(function (editor) {
+        activeEditor = editor;
         if (editor) {
             triggerUpdateDecorations();
         }
