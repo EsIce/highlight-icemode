@@ -1,0 +1,35 @@
+{
+    "name": "highlight-icemode",
+    "displayName": "highlight-icemode",
+    "description": "Highlight all selected occurrences of words. (border mode)",
+    "version": "0.0.3",
+    "publisher": "iceliu",
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.10.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./extension",
+    
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/EsIce/highlight-icemode"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5",
+        "mocha": "^3.5.0",
+        "eslint": "^4.6.1",
+        "@types/node": "^7.0.0",
+        "@types/mocha": "^2.2.42"
+    }
+}
