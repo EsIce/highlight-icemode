@@ -2,11 +2,11 @@
     "name": "highlight-icemode",
     "displayName": "highlight-icemode",
     "description": "Highlight all selected occurrences of words. (border mode)",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "publisher": "iceliu",
     "icon": "images/icon.png",
     "engines": {
-        "vscode": "^1.10.0"
+        "vscode": "^1.12.0"
     },
     "categories": [
         "Other"
@@ -53,11 +53,6 @@
         "url": "https://github.com/EsIce/highlight-icemode"
     },
     "devDependencies": {
-        "typescript": "^2.5.2",
-        "vscode": "^1.1.5",
-        "mocha": "^3.5.0",
-        "eslint": "^4.6.1",
-        "@types/node": "^7.0.0",
-        "@types/mocha": "^2.2.42"
+        "vscode": "^1.1.5"
     }
 }

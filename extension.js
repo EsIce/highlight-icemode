@@ -42,6 +42,7 @@ function activate(context) {
         try {
             var text = activeEditor.document.getText();
             var word = activeEditor.document.getText(activeEditor.selection);
+            word = word.replace(/[\W_]/g, "\\$&");  //在特殊字元前面加上 “\\” thanks harlen
             //console.log("1word:"+word);
             var mathes = {}, match;
             var opts = 'gi';
@@ -77,14 +78,14 @@ function activate(context) {
                     }
                 }
             }
-
             Object.keys(decorationTypes).forEach((v) => {
                 var range = mathes[v] ? mathes[v] : [];
                 var decorationType = decorationTypes[v];
                 activeEditor.setDecorations(decorationType, range);
             })
-        } catch (error) {
-            vscode.window.showInformationMessage("highlight-icemode got some error. but it's ok! dont' be afraid !");
+        } catch (err) {
+            vscode.window.setStatusBarMessage("highlight-icemode got some error. but it's ok! dont' be afraid !",3000);
+            console.log(err.message);
         }
         
     }
